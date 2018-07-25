@@ -1,0 +1,131 @@
+to create new project ng new <project name>
+cd <project name>
+to start server ng serve --open
+bootstrap: define index.html, module file
+how does index.html connect to selector of component:
+    by module file.
+    angular component is declared in module
+    it can be found from here.
+    imports defined in angular module will be available to components defined in module.
+
+components:
+    create component as class
+    provide metadata as decorator details
+    import what is needed
+    use PascalCasing
+    use Component keyword at the end of classname and filename
+    use export keyword for class
+
+data binding techniques:
+    interpolation: {{  }}
+
+    interpolation is one way binding - two curly braces, variable in a component's class.
+    calculations, concatenations, calling methods, etc can be done.
+    two ways data can be inserted between html tags.
+    between tags:
+    <h1>{{pageTitle}}</h1>
+    or
+    property:
+    <h1 innerText={{pageTitle}}></h1>
+
+    property binding:
+        syntax:
+            <img [src]='product.imageUrl'>
+            src is target property.
+            alternative using interpolation:
+            <img src={{product.imageUrl}}>
+            general guideline is to prefer property binding over interpolation.
+            if expression is needed or concatenations are needed, interpolation serves better.
+
+    event binding:
+        to listen to user's actions and act.
+        syntax:
+            <button (click)='<call method>'>
+    
+    two way binding:
+        ngModel:
+            syntax:
+                <input [(ngModel)]='listFilter'>
+                [(ngModel)] -> square brackets indicate property binding
+                from class property to input element.
+                parentheses indicate event binding to indicate
+                user entered data back to class property.
+                Since ngModel is mostly used while building forms,
+                it resides in FormsModule.
+                Import FormsModule in app module.
+
+    use strong typing always.
+    use interfaces for defining strong type of custom types.
+
+    styles:
+        add unique styles to styles property.
+        add common styles to styleUrls property.
+
+    life cycle hooks:
+        three most commonly used lifecycle hooks:
+            OnInit: perform component initialization, retrieve data
+            OnChanges: actions after change on input properties stays here
+            OnDestroy: perform cleanup
+            to use a lifecycle hook implement lifecycle hook interface
+            import life cycle hook interface from angular and each interface has methods to be implemented
+            method name convention: ng + life cycle name
+
+    custom pipes can be built
+
+    Nested components
+        A component that can be nested with in another component
+        container component is parent component
+        nested component is the child component
+        communication:
+            parent to child input properties
+            child to parent output properties
+
+            input decorator data will be sent to nested component from container component from directive of nested component
+            nested component takes property binding of input property and data is passed to it
+
+            output decorator defined in nested component will be defined in container template nested directive
+            as event binding
+
+            define method that can be used in container component in container template with any variables needed as <$event>
+
+    Services
+        A service can be used to serve data or any other common serving purpose across components
+        service is a regular ts class that will be registered in module
+        angular injector creates a single instance of registered service
+        if a component needs to use a service, it defines service instance as dependency in its constructor
+
+        adding Injectable decorator for every service is optional, it is needed
+        if a service has an injected dependency of its own
+        it is a best practice to use Injectable decorator since it maintains
+        clarity and consistency across all services
+
+        to reigster a service, we must register a provider - a code that can create or return service
+        generally service class itself
+
+        if a service is registered in a component, it will be accessible to it and its children
+
+        if a service is registered in a module, it will be accessible to all components of the module
+
+        append service to name of class
+
+        registering a service in app component is a good idea
+
+        
+    Observables:
+        Using observables to retrieve data from internet
+        Observables help manage async data coming from sources such as backend services
+        Observables treat events as collections
+        Think of Observable as an array whose items arrive async over time
+        Observables are proposed feature for 2016 js
+        To use Observables now angular uses Reactive Extensions RxJs 3rd party extension
+
+        Observables helps manipulate sets of events using operators
+        Operators are methods on Observables that compose new Observables
+        Each operator transforms source observable in some way
+        Operators do not wait for all the values and process them at once
+        Operators on Observables process each value as it is emitted
+        Examples of operators: map, filter, merge
+        method in code can subscribe to observable to async receive data
+        map operator - transforms incoming data
+
+        
